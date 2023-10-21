@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const videoMetadataSchema = new mongoose.Schema({
-  //TODO: Need to change schema later
+  // TODO: Need to change schema later
   title: String,
   data: Buffer,
   description: String,
