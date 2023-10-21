@@ -6,7 +6,7 @@ const router = express.Router()
 const bodyParser = require('body-parser')
 router.post('/getGeneratedName', async (req, res) => {
   while (true) {
-    var username = unique.uniqueNamesGenerator({
+    let username = unique.uniqueNamesGenerator({
       dictionaries: [unique.adjectives, unique.starWars],
       style: 'capital',
       separator: ''
