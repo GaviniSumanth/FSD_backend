@@ -15,26 +15,27 @@ router.post('/getGeneratedName', async (req, res) => {
     username = username.split(' ').join('')
     if (username.length < 32 && username.length > 7) {
       username = username.replace('-', '')
+      try {
+        res.json(username)
+      } catch (error) {
+        res.send(error)
+      }
       break
     }
   }
-  try {
-    res.json(username)
-  } catch (error) {
-    res.send(error)
-  }
 })
 router.post('/Signup', bodyParser.json(), async (req, res) => {
-  //TODO: signup api
-  const { username, email, profile_pic, hash, salt } = req.body
+  // TODO: signup api
+  const { username, email, profilepic, hash, salt } = req.body
   const existingUser = await User.findOne({ username })
   if (!existingUser) {
     try {
-      const userd = new User({ username, email, profile_pic, hash, salt })
+      const userd = new User({ username, email, profilepic, hash, salt })
       const savedUser = await userd.save()
       res.json(savedUser)
     } catch (error) {
       res.send(error)
+      db.close()
     }
   } else {
     res.json('Username exists')
